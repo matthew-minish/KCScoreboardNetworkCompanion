@@ -2,9 +2,12 @@ package nz.org.cdntrust.pointschangenetworklistener.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nz.org.cdntrust.pointschangenetworklistener.models.PointsChangeRequest;
+import nz.org.cdntrust.pointschangenetworklistener.models.ProtectedPointsChangeRequest;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,6 +22,7 @@ import java.util.Map;
 public class PointsController {
 
     private static final String CHANGES_FILE_NAME = "changesFromAPI.json";
+    private static final String PASSWORD_EXPECTED = "leadersarelame";
 
     private List<PointsChangeRequest> requests;
 
@@ -26,9 +30,26 @@ public class PointsController {
         this.requests = new ArrayList<>();
     }
 
+    // Basic GET endpoint that can be queried by client devices as a means of checking if this APi is up and reachable
+    @GetMapping("/healthcheck")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("All okay!");
+    }
+
     @PostMapping("/changepoints")
     public ResponseEntity<String> notifyPointsChange(@RequestBody PointsChangeRequest request) {
         // "changesFromAPI.json"
+        requests.add(request);
+
+        return ResponseEntity.ok("Successfully received points change request");
+    }
+
+    @PostMapping("/changepointsprotected")
+    public ResponseEntity<String> notifyPointsChangeProtected(@RequestBody ProtectedPointsChangeRequest request) {
+        // "changesFromAPI.json"
+        if(!request.password.equals(PASSWORD_EXPECTED)) {
+            return ResponseEntity.badRequest().body("Incorrect password");
+        }
         requests.add(request);
 
         return ResponseEntity.ok("Successfully received points change request");

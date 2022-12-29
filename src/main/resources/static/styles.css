@@ -1,0 +1,16 @@
+button {
+    width: 100%;
+}
+
+span {
+    text-align: center;
+    font-size: 3vh;
+}
+
+.points-label {
+    font-size: 4vh !important;
+}
+
+.point-button {
+    font-size: 3vh;
+}
