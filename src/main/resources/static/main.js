@@ -20,6 +20,20 @@ function orangeGirlsPointsChange(val) { orangeGirlsPoints += val; refreshPoints(
 function redGirlsPointsChange(val) { redGirlsPoints += val; refreshPoints(); }
 function yellowGirlsPointsChange(val) { yellowGirlsPoints += val; refreshPoints(); }
 
+function allPointsChange(val) { 
+    blueBoysPoints += val;
+    greenBoysPoints += val;
+    orangeBoysPoints += val;
+    redBoysPoints += val;
+    yellowBoysPoints += val;
+    blueGirlsPoints += val;
+    greenGirlsPoints += val;
+    orangeGirlsPoints += val;
+    redGirlsPoints += val;
+    yellowGirlsPoints += val;
+    refreshPoints(); 
+}
+
 function refreshPoints()
 {
     document.getElementById('blueBoysLabel').innerText = blueBoysPoints;
