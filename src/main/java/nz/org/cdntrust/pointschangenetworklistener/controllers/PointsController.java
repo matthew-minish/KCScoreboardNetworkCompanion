@@ -34,7 +34,7 @@ public class PointsController {
     private String getExpectedPassword() throws IOException
     {
         String content = new String(Files.readAllBytes(Paths.get(PASSWORD_FILENAME)));
-        return content;
+        return content.trim();
     }
 
     // Basic GET endpoint that can be queried by client devices as a means of checking if this APi is up and reachable
