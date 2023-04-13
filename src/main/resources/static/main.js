@@ -46,6 +46,17 @@ function refreshPoints()
     document.getElementById('orangeGirlsLabel').innerText = orangeGirlsPoints;
     document.getElementById('redGirlsLabel').innerText = redGirlsPoints;
     document.getElementById('yellowGirlsLabel').innerText = yellowGirlsPoints;
+
+    localStorage.setItem('blueBoysPoints', blueBoysPoints);
+    localStorage.setItem('greenBoysPoints', greenBoysPoints);
+    localStorage.setItem('orangeBoysPoints', orangeBoysPoints);
+    localStorage.setItem('redBoysPoints', redBoysPoints);
+    localStorage.setItem('yellowBoysPoints', yellowBoysPoints);
+    localStorage.setItem('blueGirlsPoints', blueGirlsPoints);
+    localStorage.setItem('greenGirlsPoints', greenGirlsPoints);
+    localStorage.setItem('orangeGirlsPoints', orangeGirlsPoints);
+    localStorage.setItem('redGirlsPoints', redGirlsPoints);
+    localStorage.setItem('yellowGirlsPoints', yellowGirlsPoints);
 }
 
 function collectChanges()
@@ -77,6 +88,7 @@ function changePoints()
         res.text().then(value => {
             document.getElementById("submit-message").innerText = value;
         });
+        localStorage.setItem("password", document.getElementById("password-input").value)
         if (res.status == 200){
             blueBoysPoints = 0;
             greenBoysPoints = 0;
@@ -92,4 +104,23 @@ function changePoints()
         }
     });
     
+}
+
+window.onload =  function() {
+    let storedPassword = localStorage.getItem("password");
+    if(storedPassword) {
+        console.log("Previous password found, auto-filling...")
+        document.getElementById("password-input").value = storedPassword;
+    }
+    blueBoysPoints = parseInt(localStorage.getItem('blueBoysPoints')) ?? 0;
+    greenBoysPoints = parseInt(localStorage.getItem('greenBoysPoints')) ?? 0;
+    orangeBoysPoints = parseInt(localStorage.getItem('orangeBoysPoints')) ?? 0;
+    redBoysPoints = parseInt(localStorage.getItem('redBoysPoints')) ?? 0;
+    yellowBoysPoints = parseInt(localStorage.getItem('yellowBoysPoints')) ?? 0;
+    blueGirlsPoints = parseInt(localStorage.getItem('blueGirlsPoints')) ?? 0;
+    greenGirlsPoints = parseInt(localStorage.getItem('greenGirlsPoints')) ?? 0;
+    orangeGirlsPoints = parseInt(localStorage.getItem('orangeGirlsPoints')) ?? 0;
+    redGirlsPoints = parseInt(localStorage.getItem('redGirlsPoints')) ?? 0;
+    yellowGirlsPoints = parseInt(localStorage.getItem('yellowGirlsPoints')) ?? 0;
+    refreshPoints();
 }
