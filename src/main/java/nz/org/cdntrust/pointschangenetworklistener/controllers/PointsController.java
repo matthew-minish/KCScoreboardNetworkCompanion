@@ -3,7 +3,6 @@ package nz.org.cdntrust.pointschangenetworklistener.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nz.org.cdntrust.pointschangenetworklistener.models.PointsChangeRequest;
 import nz.org.cdntrust.pointschangenetworklistener.models.ProtectedPointsChangeRequest;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,12 +23,18 @@ import java.util.Map;
 public class PointsController {
 
     private static final String CHANGES_FILE_NAME = "changesFromAPI.json";
-    private static final String PASSWORD_EXPECTED = "leadersarelame";
+    private static final String PASSWORD_FILENAME = "passwordToChangePoints.txt";
 
     private List<PointsChangeRequest> requests;
 
     public PointsController() {
         this.requests = new ArrayList<>();
+    }
+
+    private String getExpectedPassword() throws IOException
+    {
+        String content = new String(Files.readAllBytes(Paths.get(PASSWORD_FILENAME)));
+        return content;
     }
 
     // Basic GET endpoint that can be queried by client devices as a means of checking if this APi is up and reachable
@@ -45,9 +52,9 @@ public class PointsController {
     }
 
     @PostMapping("/changepointsprotected")
-    public ResponseEntity<String> notifyPointsChangeProtected(@RequestBody ProtectedPointsChangeRequest request) {
+    public ResponseEntity<String> notifyPointsChangeProtected(@RequestBody ProtectedPointsChangeRequest request) throws IOException {
         // "changesFromAPI.json"
-        if(!request.password.equals(PASSWORD_EXPECTED)) {
+        if(!request.password.equals(getExpectedPassword())) {
             return ResponseEntity.badRequest().body("Incorrect password");
         }
         requests.add(request);
