@@ -112,15 +112,15 @@ window.onload =  function() {
         console.log("Previous password found, auto-filling...")
         document.getElementById("password-input").value = storedPassword;
     }
-    blueBoysPoints = parseInt(localStorage.getItem('blueBoysPoints')) ?? 0;
-    greenBoysPoints = parseInt(localStorage.getItem('greenBoysPoints')) ?? 0;
-    orangeBoysPoints = parseInt(localStorage.getItem('orangeBoysPoints')) ?? 0;
-    redBoysPoints = parseInt(localStorage.getItem('redBoysPoints')) ?? 0;
-    yellowBoysPoints = parseInt(localStorage.getItem('yellowBoysPoints')) ?? 0;
-    blueGirlsPoints = parseInt(localStorage.getItem('blueGirlsPoints')) ?? 0;
-    greenGirlsPoints = parseInt(localStorage.getItem('greenGirlsPoints')) ?? 0;
-    orangeGirlsPoints = parseInt(localStorage.getItem('orangeGirlsPoints')) ?? 0;
-    redGirlsPoints = parseInt(localStorage.getItem('redGirlsPoints')) ?? 0;
-    yellowGirlsPoints = parseInt(localStorage.getItem('yellowGirlsPoints')) ?? 0;
+    blueBoysPoints = parseInt(localStorage.getItem('blueBoysPoints') ?? '0') ?? 0;
+    greenBoysPoints = parseInt(localStorage.getItem('greenBoysPoints') ?? '0') ?? 0;
+    orangeBoysPoints = parseInt(localStorage.getItem('orangeBoysPoints') ?? '0') ?? 0;
+    redBoysPoints = parseInt(localStorage.getItem('redBoysPoints') ?? '0') ?? 0;
+    yellowBoysPoints = parseInt(localStorage.getItem('yellowBoysPoints') ?? '0') ?? 0;
+    blueGirlsPoints = parseInt(localStorage.getItem('blueGirlsPoints') ?? '0') ?? 0;
+    greenGirlsPoints = parseInt(localStorage.getItem('greenGirlsPoints') ?? '0') ?? 0;
+    orangeGirlsPoints = parseInt(localStorage.getItem('orangeGirlsPoints') ?? '0') ?? 0;
+    redGirlsPoints = parseInt(localStorage.getItem('redGirlsPoints') ?? '0') ?? 0;
+    yellowGirlsPoints = parseInt(localStorage.getItem('yellowGirlsPoints') ?? '0') ?? 0;
     refreshPoints();
 }

@@ -1,11 +1,11 @@
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  -->
     <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="col">
+    <div class="col main-container" id="non-zooming-tap">
         <div class="row mt-4 mx-3">
             <div class="col mx-1">
                 <div class="row">
@@ -170,11 +170,11 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-5 mt-5">
-            <div class="col-6">
+        <div class="row px-5 pt-5 align-content-center justify-content-center">
+            <div class="col-5">
                 <button class="btn btn-success" onclick="allPointsChange(10)"><span class="point-button">+10 for all</span></button>
             </div>
-            <div class="col-6">
+            <div class="col-5">
                 <button class="btn btn-secondary" onclick="allPointsChange(-10)"><span class="point-button">-10 for all</span></button>
             </div>
         </div>
